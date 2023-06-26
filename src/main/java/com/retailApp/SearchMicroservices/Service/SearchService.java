@@ -11,4 +11,5 @@ public interface SearchService {
 
 	ResponseEntity<List<ProductWrapper>> searchProductByName(String name);
 
+
 }

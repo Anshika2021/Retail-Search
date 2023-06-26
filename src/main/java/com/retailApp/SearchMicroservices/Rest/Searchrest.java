@@ -16,4 +16,8 @@ public interface Searchrest {
 
 	@GetMapping(path="/search/{name}")
 	ResponseEntity<List<ProductWrapper>> searchProductByName(@PathVariable String name);
+	
+//	@GetMapping(path="/search/{name}")
+//	ResponseEntity<List<ProductWrapper>> searchFindProductName(@PathVariable String name);
+
 }

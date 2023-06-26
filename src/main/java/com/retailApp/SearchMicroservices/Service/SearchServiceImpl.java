@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,17 +24,18 @@ public class SearchServiceImpl implements SearchService{
 	public ResponseEntity<List<ProductWrapper>> searchProductByName(String name) {
 		try {
 			System.out.println("Inside serach");
-			ResponseEntity<ProductWrapper>responseEntity = restTemplate.getForEntity("http://localhost:8084/product/getByName/" + name, ProductWrapper.class);
-		//	ProductList productList = responseEntity.getBody();
+			ResponseEntity<List<ProductWrapper>>responseEntity = restTemplate.exchange("http://localhost:8084/product/getByName/" + name,HttpMethod.GET,null, new ParameterizedTypeReference<List<ProductWrapper>>() {
+            });
+			List<ProductWrapper> productList = responseEntity.getBody();
 			
 			System.out.println(responseEntity);
-			ProductWrapper products = responseEntity.getBody(); 
-			System.out.println(products);
+//			List<ProductWrapper> products = responseEntity.getBody(); 
+//			System.out.println(products);
 			
-			//List<Products>productList= getProductFromList(productList);
-			List<ProductWrapper>productList = new ArrayList<ProductWrapper>();
+//			List<Products>productList= getProductFromList(productList);
+//			List<ProductWrapper>productList = new ArrayList<ProductWrapper>();
 			
-			productList.add(products);
+// 		productList.add(products);
 			return new ResponseEntity<List<ProductWrapper>>(productList, HttpStatus.OK);
 		}
 		catch(Exception ex)
@@ -42,5 +45,34 @@ public class SearchServiceImpl implements SearchService{
 		return new ResponseEntity<List<ProductWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+	
+	
+//	
+//	@Override
+//	public ResponseEntity<List<ProductWrapper>> searchFindProductName(String name) {
+//		try {
+//			System.out.println("Inside serach");
+//			ResponseEntity<ProductWrapper>responseEntity = restTemplate.getForEntity("http://localhost:8084/product/getByProduct/" + name, ProductWrapper.class);
+//		//	ProductList productList = responseEntity.getBody();
+//			
+//			System.out.println(responseEntity);
+//			ProductWrapper products = responseEntity.getBody(); 
+//			System.out.println(products);
+//			
+//			//List<Products>productList= getProductFromList(productList);
+//			List<ProductWrapper>productList = new ArrayList<ProductWrapper>();
+//			
+//			productList.add(products);
+//			return new ResponseEntity<List<ProductWrapper>>(productList, HttpStatus.OK);
+//		}
+//		catch(Exception ex)
+//		{
+//			ex.printStackTrace();
+//		}
+//		return new ResponseEntity<List<ProductWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//	}
+//	
 
 }
+	

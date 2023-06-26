@@ -21,5 +21,10 @@ public class SearchImpl implements Searchrest {
 	public ResponseEntity<List<ProductWrapper>> searchProductByName(String name) {
 		return searchService.searchProductByName(name);
 	}
-
+	
+//	
+//	@Override
+//	public ResponseEntity<List<ProductWrapper>> searchFindProductName(String name) {
+//		return searchService.searchProductByName(name);
+//	}
 }
